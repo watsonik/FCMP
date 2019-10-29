@@ -11,6 +11,19 @@ let request = (category = 'business') => {
         });
 };
 
+function createNewsNodes(data) {
+    data.articles.forEach(article => console.log(article.description));
+
+}
+
+let fetchNews = (category) => {
+    request(category)
+        .then(data => {
+            console.log(data);
+            createNewsNodes(data);
+        })
+};
+
 let createCategoryList = () => {
     let menu = document.getElementById('menu');
     let list = ['business', 'entertainment', 'health', 'science', 'sports', 'technology'];
@@ -22,7 +35,7 @@ let createCategoryList = () => {
         menu.appendChild(li);
     });
     menu.addEventListener("click", (category) => {
-        console.log(category);
+        fetchNews(category.target.getAttribute('data'));
     })
 
 
