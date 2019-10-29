@@ -21,6 +21,9 @@ let createCategoryList = () => {
         li.innerHTML = el;
         menu.appendChild(li);
     });
+    menu.addEventListener("click", (category) => {
+        console.log(category);
+    })
 
 
 };
