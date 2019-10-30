@@ -17,7 +17,7 @@ const cleanNewsNodes = () => {
 const template = (post) => {
     const li = document.createElement('li');
     const title = document.createElement('h1');
-    const date = document.createElement('p');
+    const date = document.createElement('h5');
     const author = document.createElement('h2');
     const image = document.createElement('img');
     const text = document.createElement('p');
