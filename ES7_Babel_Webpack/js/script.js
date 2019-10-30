@@ -1,31 +1,27 @@
 let request = (category = 'business') => {
-    return fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=6017a840ef644f4fb0a521c8674c5b4a`, {
-        method: 'get'
-    })
-        .then((responce) => {
-            if (responce.ok) {
-                return responce.json();
+    return fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=6017a840ef644f4fb0a521c8674c5b4a`)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
             }
-            throw new Error(responce.statusText);
-
-        });
+        })
 };
 
-function cleanNewsNodes(data) {
-    let news = document.getElementById('news');
+const cleanNewsNodes = () => {
+    const news = document.getElementById('news');
     while (news && news.firstChild) {
         news.removeChild(news.firstChild)
     }
-}
+};
 
-let template = (post) => {
-    let li = document.createElement('li');
-    let title = document.createElement('h1');
-    let date = document.createElement('p');
-    let author = document.createElement('h2');
-    let image = document.createElement('img');
-    let text = document.createElement('p');
-    let a = document.createElement('a');
+const template = (post) => {
+    const li = document.createElement('li');
+    const title = document.createElement('h1');
+    const date = document.createElement('p');
+    const author = document.createElement('h2');
+    const image = document.createElement('img');
+    const text = document.createElement('p');
+    const a = document.createElement('a');
 
     title.innerHTML = post.title;
     author.innerHTML = post.author;
@@ -45,23 +41,22 @@ let template = (post) => {
     return li;
 };
 
-function createNewsNodes(data) {
+const createNewsNodes = data => {
     let news = document.getElementById('news');
     data.articles.forEach(article => news.appendChild(template(article)));
 
-}
+};
 
 let showError = e => {
     let app = document.getElementById('app');
     let p = document.createElement('p');
     p.innerHTML = e;
     app.appendChild(p);
-}
+};
 
 let fetchNews = (category) => {
     request(category)
         .then(data => {
-            console.log(data);
             cleanNewsNodes();
             createNewsNodes(data);
         })
@@ -82,10 +77,6 @@ let createCategoryList = () => {
         fetchNews(category.target.getAttribute('data'));
     })
 
-
-};
-let main = () => {
-    createCategoryList();
 };
 
-main();
+createCategoryList();
