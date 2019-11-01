@@ -1,7 +1,7 @@
 module.exports = {
     mode: 'production',
     entry: {
-        main: './ES7_Babel_Webpack/js/script.js'
+        main: ["whatwg-fetch", "@babel/polyfill", './ES7_Babel_Webpack/js/script.js']
     },
     devtool: 'source-map',
     output: {
@@ -13,7 +13,10 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules)/
+                exclude: /(node_modules)/,
+                use: {
+                    loader: "babel-loader",
+                },
 
             }
         ]

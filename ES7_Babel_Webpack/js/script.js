@@ -9,8 +9,8 @@ let request = (category = 'business') => {
 
 const cleanNewsNodes = () => {
     const news = document.getElementById('news');
-    while (news && news.firstChild) {
-        news.removeChild(news.firstChild)
+    if (news.firstChild) {
+        news.innerHTML = "";
     }
 };
 
@@ -42,7 +42,7 @@ const template = (post) => {
 };
 
 const createNewsNodes = data => {
-    let news = document.getElementById('news');
+    const news = document.getElementById('news');
     data.articles.forEach(article => news.appendChild(template(article)));
 
 };
