@@ -12,8 +12,8 @@ var request = function request() {
 var cleanNewsNodes = function cleanNewsNodes() {
   var news = document.getElementById('news');
 
-  while (news && news.firstChild) {
-    news.removeChild(news.firstChild);
+  if (news.firstChild) {
+    news.innerHTML = "";
   }
 };
 
@@ -59,7 +59,7 @@ var fetchNews = function fetchNews(category) {
   request(category).then(function (data) {
     cleanNewsNodes();
     createNewsNodes(data);
-  })["catch"](function (e) {
+  }).catch(function (e) {
     return showError(e);
   });
 };

@@ -1,7 +1,7 @@
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: {
-        main: ["whatwg-fetch", "@babel/polyfill", './ES7_Babel_Webpack/js/script.js']
+        main: ["whatwg-fetch", "@babel/polyfill", './js/script.js']
     },
     devtool: 'source-map',
     output: {
@@ -17,13 +17,8 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                 },
+
             }
         ]
-    },
-    devServer: {
-        contentBase: './dist',
-        publicPath: './dist',
-        hot: true,
-        historyApiFallback: true
     },
 }

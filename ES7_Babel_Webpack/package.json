@@ -7,7 +7,7 @@
     "build:dev": "webpack --config webpack.config.dev.js",
     "build:prod": "webpack --config webpack.config.prod.js",
     "dev": "webpack-dev-server --config webpack.config.dev.js",
-    "watch": "babel ES7_Babel_Webpack/js --watch --out-file compiled.js"
+    "watch": "babel js --watch --out-file compiled.js"
   },
   "repository": {
     "type": "git",
