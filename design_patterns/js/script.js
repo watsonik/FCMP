@@ -1,3 +1,5 @@
+import {ErrorsHandler} from "./errorsHandler";
+
 let request = (category = 'business') => {
     return fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=6017a840ef644f4fb0a521c8674c5b4a`)
         .then((response) => {
@@ -60,7 +62,9 @@ let fetchNews = (category) => {
             cleanNewsNodes();
             createNewsNodes(data);
         })
-        .catch(e => showError(e));
+        .catch((error) => {
+            new ErrorsHandler().handle(error);
+        });
 };
 
 let createCategoryList = () => {
