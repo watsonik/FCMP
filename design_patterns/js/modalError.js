@@ -1,4 +1,4 @@
-class ErrorModal {
+export class ErrorModal {
     constructor() {
         this.body = document.querySelector('body');
     }
@@ -35,7 +35,3 @@ class ErrorModal {
         this.body.removeChild(modal);
     }
 }
-
-const errorPage = new ErrorModal();
-
-export default errorPage;
