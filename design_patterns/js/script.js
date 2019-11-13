@@ -1,9 +1,22 @@
 import {ErrorsHandler} from "./errorsHandler";
 import {FetchFactory} from "./fetchFactory";
 
-let request = (category = 'business') => {
-    const factory = new FetchFactory;
-    return factory.sendRequest(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=6017a840ef644f4fb0a521c8674c5b4a`)
+let request = (category = 'business', type = 'GET') => {
+    const factory = new FetchFactory();
+
+    // ------------ PROXY ----------------------
+
+    var factoryProxy = new Proxy(factory, {
+        get(target, key) {
+            const propertyValue = target[key];
+            return (...args) => {
+                console.log("method: " + type);
+                console.log("category: " + category);
+                return propertyValue.apply(target, args);
+            };
+        }
+    });
+    return factoryProxy.sendRequest(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=6017a840ef644f4fb0a521c8674c5b4a`, `${type}`)
         .then((response) => {
             if (response.ok) {
                 return response.json();
