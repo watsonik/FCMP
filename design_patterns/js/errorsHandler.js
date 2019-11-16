@@ -17,9 +17,9 @@ export class ErrorsHandler {
     }
 
     handle(message) {
-        if (!ErrorsHandler.instance) {
-            ErrorsHandler.instance = this;
-        }
+        // if (!ErrorsHandler.instance) {
+        //     ErrorsHandler.instance = this;
+        // }
         this.ErrorModal.render(message);
     }
 }

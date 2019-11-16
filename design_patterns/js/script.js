@@ -6,7 +6,7 @@ let request = (category = 'business', type = 'GET') => {
 
     // ------------ PROXY ----------------------
 
-    var factoryProxy = new Proxy(factory, {
+    const factoryProxy = new Proxy(factory, {
         get(target, key) {
             const propertyValue = target[key];
             return (...args) => {
