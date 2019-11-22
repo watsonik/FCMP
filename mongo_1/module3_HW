@@ -1,0 +1,245 @@
+3.1 How many “Chinese” (cuisine) restaurants are in “Queens” (borough)?
+> db.restaurants.find ({ borough: 'Queens', cuisine: 'Chinese'}).count()
+728
+>
+See 3_1_compass.png
+//================================================================
+3.2 What is the _id of the restaurant which has the grade with the highest ever score?
+> db.restaurants.find({},{restaurant_id: 1, _id: 0} ).sort({ 'grades.score': -1 }).limit(1)
+{ "restaurant_id" : "40372466" }
+>
+See 3_2_compass.png
+//================================================================
+3.3 Add a grade { grade: "A", score: 7, date: ISODate() } to every restaurant in “Manhattan” (borough).
+> db.restaurants.updateMany({borough: "Manhattan"}, {$push: {grades: { grade: "A", score: 7, date: ISODate()}}})
+{ "acknowledged" : true, "matchedCount" : 10259, "modifiedCount" : 10259 }
+>
+See 3_3_compass.png
+//================================================================
+3.4 What are the names of the restaurants which have a grade at index 8 with score less then 7? Use projection to include only names without _id
+> db.restaurants.find({"grades.8.score": {$lt: 7}}, {"name": 1, "_id": 0})
+{ "name" : "Silver Krust West Indian Restaurant" }
+{ "name" : "Pure Food" }
+>
+See 3_4_compass.png
+//================================================================
+3.5 What are _id and borough of “Seafood” (cuisine) restaurants  which received at least one “B” grade in period from 2014-02-01 to 2014-03-01? Use projection to include only _id and borough.
+> db.restaurants.find({'cuisine': 'Seafood', 'grades': {$elemMatch: {'grade': 'B', $and: [{'date': {$gt: ISODate('2014-02-01'),$lt: ISODate('2014-03-01')}}]}}},{'borough':1})
+{ "_id" : ObjectId("5dcfdbe1690909d2c2b38dab"), "borough" : "Bronx" }
+{ "_id" : ObjectId("5dcfdbe1690909d2c2b39017"), "borough" : "Manhattan" }
+>
+See 3_5_compass.png
+
+//================================================================
+4.1 Create an index which will be used by this query and provide proof (from explain() or Compass UI) that the index is indeed used by the winning plan:
+  db.restaurants.find({ name: "Glorious Food" })
+> db.restaurants.createIndex({"name": 1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+> db.restaurants.explain().find({ name: "Glorious Food" })
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "frontcamp.restaurants",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "name" : {
+                                "$eq" : "Glorious Food"
+                        }
+                },
+                "queryHash" : "01AEE5EC",
+                "planCacheKey" : "4C5AEA2C",
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "name" : 1
+                                },
+                                "indexName" : "name_1",
+                                "isMultiKey" : false,
+                                "multiKeyPaths" : {
+                                        "name" : [ ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "name" : [
+                                                "[\"Glorious Food\", \"Glorious Food\"]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+
+See 4_1_compass.png
+//================================================================
+4.2 Drop index from task 4.1
+
+> db.restaurants.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "frontcamp.restaurants"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "name" : 1
+                },
+                "name" : "name_1",
+                "ns" : "frontcamp.restaurants"
+        }
+]
+> db.restaurants.dropIndex({"name": 1})
+{ "nIndexesWas" : 2, "ok" : 1 }
+> db.restaurants.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "frontcamp.restaurants"
+        }
+]
+>
+//================================================================
+4.3 Create an index to make this query covered and provide proof (from explain() or Compass UI) that it is indeed covered:
+db.restaurants.find({ restaurant_id: "41098650" }, { _id: 0, borough: 1 })
+
+> db.restaurants.createIndex({restaurant_id: 1, borough: 1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+>
+
+"winningPlan" : {
+                        "stage" : "PROJECTION_COVERED",
+                        "transformBy" : {
+                                "_id" : 0,
+                                "borough" : 1
+                        },
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "restaurant_id" : 1,
+                                        "borough" : 1
+                                },
+                                "indexName" : "restaurant_id_1",
+                                "isMultiKey" : false,
+                                "multiKeyPaths" : {
+                                        "restaurant_id" : [ ],
+                                        "borough" : [ ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "restaurant_id" : [
+                                                "[\"41098650\", \"41098650\"]"
+                                        ],
+                                        "borough" : [
+                                                "[MinKey, MaxKey]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+
+See 4_3_compass.png
+//================================================================
+4.4 Create a partial index on cuisine field which will be used only when filtering on borough equal to “Staten Island”:
+db.restaurants.find({ borough: "Staten Island", cuisine: "American" }) – uses index
+db.restaurants.find({ borough: "Staten Island", name: "Bagel Land" }) – does not use index
+db.restaurants.find({ borough: "Queens", cuisine: "Pizza" }) – does not use index
+
+> db.restaurants.createIndex({cuisine: 1},{partialFilterExpression: {borough: "Staten Island"}})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+>
+
+> db.restaurants.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "frontcamp.restaurants"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "cuisine" : 1
+                },
+                "name" : "cuisine_1",
+                "ns" : "frontcamp.restaurants",
+                "background" : false,
+                "partialFilterExpression" : {
+                        "borough" : "Staten Island"
+                }
+        }
+]
+>
+See 4_4_1_compass.png, 4_4_2_compass.png, 4_4_3_compass.png
+//================================================================
+
+4.5 Create an index to make query from task 3.4 covered and provide proof (from explain() or Compass UI) that it is indeed covered
+
+> db.restaurants.createIndex({"grades.8.score": 1, name: 1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+>
+
+> db.restaurants.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "frontcamp.restaurants"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "grades.8.score" : 1,
+                        "name" : 1
+                },
+                "name" : "grades.8.score_1",
+                "ns" : "frontcamp.restaurants",
+                "background" : false
+        }
+]
+>
+See 4_5_compass.png
