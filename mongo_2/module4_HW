@@ -1,0 +1,76 @@
+c:\Program Files\MongoDB\Server\4.2\bin>mongoimport.exe -d frontcamp -c airlines --type csv --headerline --file "C:\Program Files"\MongoDB\Server\4.2\bin\airlines.csv
+2019-11-22T17:49:36.396+0300    connected to: mongodb://localhost/
+2019-11-22T17:49:39.397+0300    [######################..] frontcamp.airlines   17.9MB/19.1MB (94.1%)
+2019-11-22T17:49:39.592+0300    [########################] frontcamp.airlines   19.1MB/19.1MB (100.0%)
+2019-11-22T17:49:39.592+0300    186648 document(s) imported successfully. 0 document(s) failed to import.
+
+> db.airlines.count()
+186648
+>
+1. How many records does each airline class have? Use $project to show result as { class: "Z", total: 999 }
+> db.airlines.aggregate([{$group:{_id:"$class",total:{$sum:1}}},{$project:{_id:0,class:"$_id",total:"$total"}}])
+{ "class" : "F", "total" : 140343 }
+{ "class" : "G", "total" : 17499 }
+{ "class" : "P", "total" : 5683 }
+{ "class" : "L", "total" : 23123 }
+
+See 1_airline.png
+
+//======================================================================================
+
+2. What are the top 3 destination cities outside of the United States (destCountry field, not included) with the highest average passengers count? Show result as { "avgPassengers" : 2312.380, "city" : "Minsk, Belarus" }
+> db.airlines.aggregate([{$match: {   destCountry: {     $ne: 'United States'   } }}, {$group: {   _id: '$destCity',   avgPassengers: {     $avg: '$passengers'   } }}, {$sort: {   avgPassengers: -1 }}, {$limit: 3}, {$project: {   _id: 0,   avgPassengers: '$avgPassengers',   city: '$_id' }}])
+{ "avgPassengers" : 8052.380952380952, "city" : "Abu Dhabi, United Arab Emirates" }
+{ "avgPassengers" : 7176.596638655462, "city" : "Dubai, United Arab Emirates" }
+{ "avgPassengers" : 7103.333333333333, "city" : "Guangzhou, China" }
+
+See 2_airline.png
+
+//======================================================================================
+
+3. Which carriers provide flights to Latvia (destCountry)? Show result as one document { "_id" : "Latvia", "carriers" : [ "carrier1", " carrier2", …] }
+> db.airlines.aggregate([{$match: {destCountry: {$eq: "Latvia"}}}, {$group: {_id: "$destCountry",carriers: {$addToSet: "$carrier"}}}])
+{ "_id" : "Latvia", "carriers" : [ "Blue Jet SP Z o o", "JetClub AG", "Uzbekistan Airways" ] }
+>
+See 3_airline.png
+
+//======================================================================================
+
+4. What are the carriers which flue the most number of passengers from the United State to either Greece, Italy or Spain? Find top 10 carriers, but provide the last 7 carriers (do not include the first 3). Show result as { "_id" : "<carrier>", "total" : 999}
+> db.airlines.aggregate([{$match: {destCountry: {$in: ["Greece", "Italy", "Spain"]},originCountry: {$eq: "United States"}}}, {$group: {_id: "$carrier",total: {$sum: "$passengers"}}}, {$sort: {total: -1}}, {$limit: 10}, {$skip: 3}])
+{ "_id" : "Compagnia Aerea Italiana", "total" : 280256 }
+{ "_id" : "United Air Lines Inc.", "total" : 229936 }
+{ "_id" : "Emirates", "total" : 100903 }
+{ "_id" : "Air Europa", "total" : 94968 }
+{ "_id" : "Meridiana S.p.A", "total" : 20308 }
+{ "_id" : "Norwegian Air Shuttle ASA", "total" : 13344 }
+{ "_id" : "VistaJet Limited", "total" : 183 }
+>
+See 4_airline.png
+
+//======================================================================================
+
+5. Find the city (originCity) with the highest sum of passengers for each state (originState) of the United States (originCountry). Provide the city for the first 5 states ordered by state alphabetically (you should see the city for Alaska, Arizona and etc). Show result as { "totalPassengers" : 999, "location" : { "state" : "abc", "city" : "xyz" } }
+> db.airlines.aggregate([{$match: {originCountry: {$eq: "United States"}}}, {$group: {_id: {originCity: "$originCity",originState: "$originState"},total: {$sum: "$passengers"}}}, {$sort: {total: -1}}, {$group: {_id: "$_id.originState",city: {$first: "$_id.originCity"},totalPassengers: {$first: "$total"}}}, {$sort: {_id: 1}}, {$limit: 5}, {$project: {_id: 0,totalPassengers: "$totalPassengers",location: {state: "$_id",city: "$city"}}}])
+{ "totalPassengers" : 760120, "location" : { "state" : "Alabama", "city" : "Birmingham, AL" } }
+{ "totalPassengers" : 1472404, "location" : { "state" : "Alaska", "city" : "Anchorage, AK" } }
+{ "totalPassengers" : 13152753, "location" : { "state" : "Arizona", "city" : "Phoenix, AZ" } }
+{ "totalPassengers" : 571452, "location" : { "state" : "Arkansas", "city" : "Little Rock, AR" } }
+{ "totalPassengers" : 23701556, "location" : { "state" : "California", "city" : "Los Angeles, CA" } }
+>
+
+See 5_airline.png
+
+//==============--- ENRON ---===============================================
+
+c:\Program Files\MongoDB\Server\4.2\bin>mongorestore -d frontcamp -c enron "C:\Program Files\MongoDB\Server\4.2\bin\messages.bson"
+2019-11-22T21:34:36.056+0300    checking for collection data in C:\Program Files\MongoDB\Server\4.2\bin\messages.bson
+2019-11-22T21:34:36.085+0300    restoring frontcamp.enron from C:\Program Files\MongoDB\Server\4.2\bin\messages.bson
+2019-11-22T21:34:38.956+0300    no indexes to restore
+2019-11-22T21:34:38.957+0300    finished restoring frontcamp.enron (120477 documents, 0 failures)
+2019-11-22T21:34:38.957+0300    120477 document(s) restored successfully. 0 document(s) failed to restore.
+
+
+> db.enron.aggregate([{'$project': {'from': '$headers.From', 'to': '$headers.To'}}, {'$unwind': {'path': '$to'}}, {'$group': {'_id': {'id': '$_id', 'from': '$from', 'to': '$to'}}}, {'$group': {'_id': {'from': '$_id.from', 'to': '$_id.to'}, 'total': {'$sum': 1}}}, {'$sort': {'total': -1}}, {'$limit': 1}, {'$project': {'_id': 0,'from': '$_id.from','to': '$_id.to','emailCount': '$total'}}],{ allowDiskUse: true })
+{ "from" : "susan.mara@enron.com", "to" : "jeff.dasovich@enron.com", "emailCount" : 750 }
+>
