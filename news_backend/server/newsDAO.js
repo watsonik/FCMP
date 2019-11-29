@@ -1,5 +1,5 @@
-class NewsDAO{
-    constructor(){
+class NewsDAO {
+    constructor() {
         this.data = [
             {
                 "source": {
@@ -284,7 +284,7 @@ class NewsDAO{
         ];
     }
 
-    getNews(){
+    getNews() {
         return this.data;
     }
 
@@ -292,7 +292,18 @@ class NewsDAO{
         return this.data.find(el => el.id == id);
     }
 
+    addNews(data) {
+        this.data.push(data);
+    }
 
+    updateNews(id, data) {
+        const index = this.data.findIndex(el => el.id == id);
+        this.data[index] = data;
+    }
+
+    deleteNews(id) {
+        this.data = this.data.filter((n, i) => i !== id);
+    }
 }
 
 module.exports = NewsDAO;
