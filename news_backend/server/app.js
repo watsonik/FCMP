@@ -7,13 +7,16 @@ const newsDAO = new NewsDAO();
 
 
 router.get('/', (req, res) => {
-    res.send(newsDAO.getNews())
+    res.send(newsDAO.getNews());
+});
+
+router.get('/:id', (req, res) => {
+    res.send(newsDAO.getNewsById(req.params.id));
 });
 
 router.use(function (req, res) {
     res.send("OK");
 });
-
 
 app.use('/news', router);
 app.listen(3000,

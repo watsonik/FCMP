@@ -6,6 +6,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 1,
                 "author": null,
                 "title": "U.S. jobless claims tumble to 213,000 just before Thanksgiving, back near post recession low - MarketWatch",
                 "description": null,
@@ -19,6 +20,7 @@ class NewsDAO{
                     "id": "fox-news",
                     "name": "Fox News"
                 },
+                "id": 2,
                 "author": "Alexandria Hein",
                 "title": "Romaine lettuce E. coli outbreak tied to California region hits 67 cases - Fox News",
                 "description": "The number of cases rose by 27 since the last update was given on Nov. 22.",
@@ -32,7 +34,8 @@ class NewsDAO{
                     "id": "cnbc",
                     "name": "CNBC"
                 },
-                "author": "Diana Olick",
+                "id": 3,
+                "author": "Diana",
                 "title": "Pending home sales fall 1.7% in October, as housing shortage worsens - CNBC",
                 "description": "Demand for housing is high, but there aren't enough homes for sale to meet it. Pending home sales fell 1.7% in October month-to-month, according to the National Association of Realtors.",
                 "url": "https://www.cnbc.com/2019/11/27/pending-home-sales-fall-1point7percent-in-october-as-housing-shortage-worsens.html",
@@ -45,6 +48,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 4,
                 "author": null,
                 "title": "Bernie Sanders channels Lizzo as he slow jams the news - CNN",
                 "description": null,
@@ -58,6 +62,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 5,
                 "author": null,
                 "title": "Stocks hit record highs as US economy tops expectations - Fox Business",
                 "description": null,
@@ -71,6 +76,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 6,
                 "author": null,
                 "title": "Wall Street opens at record highs on trade optimism, upbeat data - Investing.com",
                 "description": null,
@@ -84,6 +90,7 @@ class NewsDAO{
                     "id": null,
                     "name": "Gizmodo.com"
                 },
+                "id": 7,
                 "author": "Adam Clark Estes",
                 "title": "Our Favorite Cheap 4K TV Looks Even Better With Quantum Dot Technology - Gizmodo",
                 "description": "“Quantum dot” technology sounds like a fake invention, something made up by a well-meaning marketing team. Well, it is, and it isn’t. Although different companies have different brand names for their own recipes, quantum dot displays are a real innovation tha…",
@@ -97,6 +104,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 8,
                 "author": null,
                 "title": "SoulCycle CEO Melanie Whelan resigns - Bizwomen - The Business Journals",
                 "description": null,
@@ -110,6 +118,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 9,
                 "author": null,
                 "title": "Experts at Turkey Talk Line can answer all of your last-minute questions - KOMO News",
                 "description": null,
@@ -123,6 +132,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 10,
                 "author": null,
                 "title": "In major rebranding, Partners HealthCare to change name to Mass General Brigham - The Boston Globe",
                 "description": null,
@@ -136,6 +146,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 11,
                 "author": null,
                 "title": "Florida airport TSA finds high-capacity magazines hidden in baby toy - Fox News",
                 "description": null,
@@ -149,6 +160,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 12,
                 "author": null,
                 "title": "US economy grew at a moderate 2.1% annual rate last quarter - The Associated Press",
                 "description": null,
@@ -162,6 +174,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 13,
                 "author": null,
                 "title": "December selloff warning from strategist who predicted last year’s rout - MarketWatch",
                 "description": null,
@@ -175,6 +188,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 14,
                 "author": null,
                 "title": "Lego burns Tesla's Cybertruck with brickmobile - Fox News",
                 "description": null,
@@ -188,6 +202,7 @@ class NewsDAO{
                     "id": "the-verge",
                     "name": "The Verge"
                 },
+                "id": 15,
                 "author": "Cameron Faulkner",
                 "title": "These are the best Black Friday and Cyber Monday deals under $40 - The Verge",
                 "description": "Black Friday and Cyber Monday are great for scoring huge discounts on expensive tech, such as 4K TVs, laptops, and more. But it’s also good for saving on more affordable items, so we’ve listed several that you can find for less than $40.",
@@ -201,6 +216,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 16,
                 "author": null,
                 "title": "Boeing 777X’s fuselage split dramatically during September stress test - Seattle Times",
                 "description": null,
@@ -214,6 +230,7 @@ class NewsDAO{
                     "id": "cnbc",
                     "name": "CNBC"
                 },
+                "id": 17,
                 "author": "Lauren Thomas",
                 "title": "Toys R Us is back. Here's a look inside its first new store - CNBC",
                 "description": "This marks the Toys R Us brand's return to bricks-and-mortar retail after the company was forced to liquidate last year, shuttering its entire fleet of stores.",
@@ -227,6 +244,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 18,
                 "author": null,
                 "title": "5 things to know before the stock market opens Wednesday - CNBC",
                 "description": null,
@@ -240,6 +258,7 @@ class NewsDAO{
                     "id": "google-news",
                     "name": "Google News"
                 },
+                "id": 19,
                 "author": null,
                 "title": "Touch-Screen Self-Serve Taps Take Off As Costs Rise For Bars - NPR",
                 "description": null,
@@ -253,6 +272,7 @@ class NewsDAO{
                     "id": null,
                     "name": "Prnewswire.com"
                 },
+                "id": 20,
                 "author": null,
                 "title": "Canopy Growth Outlines \"Cannabis 2.0\" Portfolio - PRNewswire",
                 "description": "/PRNewswire/ - On November 28th, 2019, Canopy Growth Corporation (\"Canopy Growth\" or the \"Company\") (TSX: WEED) (NYSE: CGC) will officially unveil its new...",
@@ -263,9 +283,16 @@ class NewsDAO{
             }
         ];
     }
+
     getNews(){
         return this.data;
     }
+
+    getNewsById(id) {
+        return this.data.find(el => el.id == id);
+    }
+
+
 }
 
 module.exports = NewsDAO;
