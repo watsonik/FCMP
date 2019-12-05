@@ -1,0 +1,28 @@
+{
+  "name": "news_backend",
+  "version": "1.0.0",
+  "description": "Simple web-server",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watsonik/FCMP.git"
+  },
+  "author": "Ihar Sakun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/watsonik/FCMP/issues"
+  },
+  "homepage": "https://github.com/watsonik/FCMP#readme",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.5",
+    "mongoose": "^5.7.13",
+    "winston": "^3.2.1"
+  }
+}
