@@ -1,0 +1,19 @@
+<form action="/news/updatenews" method="post">
+    <input type="hidden" name="_method" value="put"/>
+    <h1>Update news</h1>
+    <div>
+        <label>news ID to update:</label>
+        <input type="text" name="targetid"/><br/>
+    </div>
+    <div>
+        <label>id:</label>
+        <input type="text" name="id"/>
+    </div>
+    <div>
+        <label>description:</label>
+        <input type="text" name="description"/>
+    </div>
+    <div>
+        <input type="submit" value="Submit"/>
+    </div>
+</form>

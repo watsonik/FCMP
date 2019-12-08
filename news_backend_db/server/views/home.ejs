@@ -1,0 +1,15 @@
+<% if (!user) { %>
+    <p>Welcome! Please <a href="/login">login</a> or <a href="/register">register</a> to edit news.</p>
+    <p>Get all <a href="/news">news</a>.</p>
+    <p>Get news by id, use /news/{id} endpoint.</p>
+<% } else { %>
+    <p>Hello, <%= user.username %>.</p>
+    <p>Get all <a href="/news">news</a>.</p>
+    <p>Get news by id, use /news/{id} endpoint.</p>
+    <p>Add <a href="/addnews">news</a>.</p>
+    <p>Update <a href="/updatenews">news</a>.</p>
+    <p>Delete all <a href="/news/delete/all">news</a>.</p>
+    <p>Delete news by id - use /news/delete/{id} endpoint.</p>
+
+    <a href="/logout">Log out</a>
+<% } %>
