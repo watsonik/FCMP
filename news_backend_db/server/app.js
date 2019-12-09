@@ -39,16 +39,14 @@ passport.use(new FacebookStrategy({
         clientSecret: '65182fd039658cdcb0ff2f8fc5d23b40',
         callbackURL: '/return'
     },
-    function (accessToken, refreshToken, profile, cb) {
-        return cb(null, profile);
-    }));
+    (accessToken, refreshToken, profile, cb) => cb(null, profile)));
 
 
-passport.serializeUser(async function (user, cb) {
+passport.serializeUser(async (user, cb) => {
     cb(null, user);
 });
 
-passport.deserializeUser(async function (obj, cb) {
+passport.deserializeUser(async (obj, cb) => {
     cb(null, obj);
 });
 

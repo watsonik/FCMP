@@ -38,9 +38,6 @@ router.get('/delete/:id', require('connect-ensure-login').ensureLoggedIn(),
             await newsService.deleteNews(id);
         }
         res.send();
-
-        await newsService.deleteNews(id);
-        res.send();
     });
 
 router.get('/delete', require('connect-ensure-login').ensureLoggedIn(),
