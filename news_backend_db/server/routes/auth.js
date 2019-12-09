@@ -21,6 +21,15 @@ router.post('/login',
         res.redirect('/');
     });
 
+router.get('/login/fb',
+    passport.authenticate('facebook'));
+
+router.get('/return',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+        res.redirect('/');
+    });
+
 router.get('/register',
     function (req, res) {
         res.render('register');

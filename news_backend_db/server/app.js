@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const bodyParser = require('body-parser');
 const UserService = require('./services/userService');
 const Logger = require('./logger');
@@ -18,21 +19,30 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 passport.use(new Strategy(
-    (usernamewww, passwordwww, cb) => {
-        userService.getByUsername(usernamewww)
+    (username, password, cb) => {
+        userService.getByUsername(username)
             .then(user => {
                 if (!user) {
                     return cb(null, false);
                 }
-                if (user.password !== passwordwww) {
+                if (user.password !== password) {
                     return cb(null, false);
                 }
-
                 return cb(null, user);
             })
             .catch(err => cb(err));
     })
 );
+
+passport.use(new FacebookStrategy({
+        clientID: 545000449412908,
+        clientSecret: '65182fd039658cdcb0ff2f8fc5d23b40',
+        callbackURL: '/return'
+    },
+    function (accessToken, refreshToken, profile, cb) {
+        return cb(null, profile);
+    }));
+
 
 passport.serializeUser(async function (user, cb) {
     cb(null, user);
