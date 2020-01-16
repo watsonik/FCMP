@@ -5,6 +5,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
+    publicPath: '/' // add to make React Router work
   },
   module: {
     rules: [
@@ -44,6 +45,7 @@ module.exports = {
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
+    historyApiFallback: true, // add to make React Router work
     contentBase: path.join(__dirname, 'public'),
     stats: 'minimal',
     port: 8800,

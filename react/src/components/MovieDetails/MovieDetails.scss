@@ -1,0 +1,91 @@
+@import '../../style/variables.scss';
+
+.details-wrapper {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding: 5rem 5rem 8rem;
+  color: $white;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 105%;
+    height: 105%;
+    top: 0;
+    left: 0;
+    background-image: url('../../../assets/img/1267865-movie-poster-wallpaper-1920x1080-for-mobile-hd.jpg');
+    background-size: cover;
+    z-index: -2;
+    filter: blur(3px) brightness(0.4);
+  }
+
+  .movie-poster {
+    width: 25rem;
+  }
+
+  .info-wrapper {
+    padding: 2rem 5rem;
+
+    .title-wrapper {
+      margin-bottom: 4rem;
+
+      .score-wrapper {
+        display: flex;
+
+        .movie-title {
+          margin-right: 2rem;
+          padding: 1rem 0;
+          font-size: 5rem;
+          letter-spacing: 0.2rem;
+          opacity: 0.9;
+        }
+
+        .movie-score {
+          display: block;
+          padding: 2rem 1.14rem;
+          color: $green;
+          font-weight: 100;
+          font-size: 3rem;
+          border: 0.1rem solid $white;
+          border-radius: 50%;
+          opacity: 0.8;
+        }
+      }
+
+      .movie-genre {
+        display: inline-block;
+        border: 1px solid $white;
+        padding: 1rem;
+        font-size: 1.5rem;
+        line-height: 1.4rem;
+        opacity: 0.8;
+      }
+    }
+
+    .year-duration-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 20rem;
+      margin-bottom: 2rem;
+      color: $red;
+      font-size: 3rem;
+      opacity: 1;
+
+      .year-label,
+      .runtime-label {
+        padding-left: 0.5rem;
+        color: $white;
+        font-size: 1.5rem;
+        opacity: 0.8
+      }
+    }
+
+    .movie-description {
+      font-size: 2rem;
+      line-height: 2.5rem;
+      opacity: 0.8;
+    }
+  }
+}

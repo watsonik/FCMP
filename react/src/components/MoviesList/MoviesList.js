@@ -2,16 +2,17 @@ import React from 'react';
 import MovieCard from './MovieCard/MovieCard';
 import './MoviesList.scss';
 
-const MoviesList = ({ movies, sortBy }) => {
+const MoviesList = ({ movies, sortBy, selectMovie }) => {
     const movieCards = movies
         .sort((a, b) => {
-            return a[sortBy] < b[sortBy]
-                ? -1
-                : 1
+            return a[sortBy] < b[sortBy] ? -1 : 1;
         })
         .map(movie => {
             const { id } = movie;
-            return <MovieCard key={id} {...movie}/>
+            return <MovieCard
+                key={id}
+                selectMovie={selectMovie}
+                {...movie}/>
         });
 
     const noMovies = (
