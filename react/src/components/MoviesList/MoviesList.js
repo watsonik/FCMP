@@ -14,12 +14,16 @@ const MoviesList = ({ movies, sortBy }) => {
             return <MovieCard key={id} {...movie}/>
         });
 
+    const noMovies = (
+        <li className="no-movies">
+            <h2>No films found</h2>
+        </li>
+    )
+
     return (
-        <>
-            <div className="movies-list">
-                {movieCards}
-            </div>
-        </>
+        <ul className="movies-list">
+            {movieCards.length ? movieCards : noMovies}
+        </ul>
     );
 }
 

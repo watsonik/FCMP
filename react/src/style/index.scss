@@ -29,5 +29,14 @@ body {
 
 .central-wrapper {
   max-width: 108rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }

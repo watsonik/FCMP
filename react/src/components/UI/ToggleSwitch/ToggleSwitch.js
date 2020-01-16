@@ -33,4 +33,4 @@ const Toggle = ({ toggleHandler, title, leftLabel, rightLabel }) => {
     );
 };
 
-export const ToggleSwitch = memo(Toggle, () => false);
+export const ToggleSwitch = memo(Toggle);

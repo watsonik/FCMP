@@ -7,19 +7,18 @@ import {
 } from './components/UI';
 import MoviesList from './components/MoviesList/MoviesList';
 import ControlBar from './components/ControlBar/ControlBar';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
     state = {
-        movies: movies,
+        movies: [],
         searchBy: 'title',
         sortBy: 'year',
         searchQuery: '',
     };
 
-    filterMovies = () => {
-        const { movies, searchBy, searchQuery } = this.state;
-        if (searchQuery === 'blood & concrete') throw new Error('Ублюдок, мать твою, а ну иди сюда...');
+    fetchMovies = (searchQuery) => {
+        const { searchBy } = this.state;
+        if (searchQuery === 'blood') throw new Error('Damn...');
         return movies.filter(movie => {
             if (typeof movie[searchBy] === 'string') {
                 return movie[searchBy]
@@ -38,7 +37,8 @@ class App extends Component {
     onSearchQueryChange = (event) => {
         event.preventDefault();
         const searchQuery = new FormData(event.target).get('search');
-        this.setState({...this.state, searchQuery});
+        const fetchedMovies = this.fetchMovies(searchQuery);
+        this.setState({...this.state, searchQuery, movies: fetchedMovies});
     };
 
     onSortToggleHandler = (event) => {
@@ -54,23 +54,21 @@ class App extends Component {
     render() {
         return (
             <div className="central-wrapper">
-                <ErrorBoundary>
-                    <Header />
-                    <main>
-                        <Search
-                            onSearch={this.onSearchQueryChange}
-                            onSearchTypeChange={this.onSearchTypeChange}
-                        />
-                        <ControlBar
-                            toggleSorting={this.onSortToggleHandler}
-                        />
-                        <MoviesList
-                            sortBy={this.state.sortBy}
-                            movies={this.filterMovies()}
-                        />
-                    </main>
-                    <Footer />
-                </ErrorBoundary>
+                <Header />
+                <main className="main">
+                    <Search
+                        onSearch={this.onSearchQueryChange}
+                        onSearchTypeChange={this.onSearchTypeChange}
+                    />
+                    <ControlBar
+                        toggleSorting={this.onSortToggleHandler}
+                    />
+                    <MoviesList
+                        sortBy={this.state.sortBy}
+                        movies={this.state.movies}
+                    />
+                </main>
+                <Footer />
             </div>
         );
     };

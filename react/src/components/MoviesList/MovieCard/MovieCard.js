@@ -6,7 +6,7 @@ const MovieCard = ({ title, year, genres, posterUrl }) => {
         <span key={genre} className="card-genre">{genre} </span>);
 
     return (
-        <div className="movie-card">
+        <li className="movie-card">
             <img className="card-image" src={posterUrl} />
             <div className="card-caption">
                 <div className="card-title-wrapper">
@@ -15,7 +15,7 @@ const MovieCard = ({ title, year, genres, posterUrl }) => {
                 </div>
                 {genresList}
             </div>
-        </div>
+        </li>
     )
 }
 

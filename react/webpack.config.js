@@ -34,6 +34,11 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.(png|jpg)$/,
+        include: path.join(__dirname, 'assets/img'),
+        loader: 'url-loader'
       }
     ]
   },
