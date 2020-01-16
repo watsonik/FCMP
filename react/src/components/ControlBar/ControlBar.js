@@ -30,7 +30,7 @@ const ControlBar = ({ changeSortType, filmsCount, sortBy, currentMovie, movies, 
                         {`${filmsCount} movie${filmsCount === 1 ? '' : 's'} found`}
                     </p>
                 </Route>
-                <Route exact path="/movie/:id">
+                <Route exact path="/film/:id">
                     <p className="same-genre-label">
                         {`Movies of the ${currentMovieGenre} genre`}
                     </p>
@@ -40,7 +40,6 @@ const ControlBar = ({ changeSortType, filmsCount, sortBy, currentMovie, movies, 
             <Route exact path="/(|search)/">
                 <ToggleSwitch
                     toggleHandler={(event) => {
-                        console.log(sortBy);
                         changeSortType(event.target.value.toLowerCase());
                         if (searchQuery) fetchMovies(searchQuery);
                     }}

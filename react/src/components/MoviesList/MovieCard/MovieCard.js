@@ -24,7 +24,7 @@ const MovieCard = ({ id, title, release_date, genres, poster_path, changeCurrent
 
     return (
         <li className="movie-card">
-            <Link to={`/movie/${id}`}>
+            <Link to={`/film/${id}`}>
                 <img
                     className="card-image"
                     src={poster_path}

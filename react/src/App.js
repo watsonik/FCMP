@@ -40,7 +40,7 @@ class App extends Component {
                 <ControlBar />
                 <MoviesList />
               </Route>
-              <Route path="/movie/:id">
+              <Route path="/film/:id">
                 <MovieDetails />
                 <ControlBar />
                 <MoviesList />
