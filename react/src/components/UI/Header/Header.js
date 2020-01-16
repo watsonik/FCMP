@@ -1,8 +1,11 @@
 import React from 'react';
 import { Logo } from '../';
+import './header.scss';
 
 export const Header = () => {
   return (
-    <Logo />
+      <header className="header">
+        <Logo />
+      </header>
   )
 }

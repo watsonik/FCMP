@@ -1,16 +1,26 @@
 import React from 'react';
-import ControlBar from './ControlBar/ControlBar';
 import MovieCard from './MovieCard/MovieCard';
+import './MoviesList.scss';
 
-const MoviesList = ({movies}) => {
-  const list = movies.map(movie => <Moviecard title={movie.title}/>);
+const MoviesList = ({ movies, sortBy }) => {
+    const movieCards = movies
+        .sort((a, b) => {
+            return a[sortBy] < b[sortBy]
+                ? -1
+                : 1
+        })
+        .map(movie => {
+            const { id } = movie;
+            return <MovieCard key={id} {...movie}/>
+        });
 
-  return (
-    <>
-      <ControlBar />
-      {list}
-    </>
-  );
+    return (
+        <>
+            <div className="movies-list">
+                {movieCards}
+            </div>
+        </>
+    );
 }
 
 export default MoviesList;

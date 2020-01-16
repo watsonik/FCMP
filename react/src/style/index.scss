@@ -1,0 +1,33 @@
+@import './reset.scss';
+@import './variables.scss';
+
+@font-face {
+  font-family: "Roboto";
+  src: url('../../assets/fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url('../../assets/fonts/Roboto-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url('../../assets/fonts/Roboto-Light.ttf');
+  font-weight: 100;
+  font-style: light;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: $gray;
+}
+
+.central-wrapper {
+  max-width: 108rem;
+  margin: 0 auto;
+}

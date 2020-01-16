@@ -1,0 +1,10 @@
+@import '../../style/variables.scss';
+
+.movies-list {
+  display: grid;
+  grid-template-columns: 30rem 30rem 30rem;
+  grid-gap: 4rem 1.5rem;
+  justify-content: space-between;
+  padding: 5rem;
+  background-color: $black;
+}
