@@ -2,8 +2,7 @@ import {
   CHANGE_SORT_TYPE,
   CHANGE_SEARCH_TYPE,
   CHANGE_CURRENT_MOVIE,
-  GET_MOVIES,
-} from './actionTypes';
+} from '../actionTypes';
 
 export const changeSortType = (newType) => ({
   type: CHANGE_SORT_TYPE,
@@ -15,12 +14,8 @@ export const changeSearchType = (newType) => ({
   payload: newType,
 });
 
-export const changeCurrentMovie = (movieId) => ({
+export const changeCurrentMovie = (movie) => ({
   type: CHANGE_CURRENT_MOVIE,
-  payload: movieId,
+  payload: movie,
 });
 
-export const getMovies = (searchQuery) => ({
-  type: GET_MOVIES,
-  payload: searchQuery,
-});

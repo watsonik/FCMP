@@ -1,24 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ToggleSwitch } from '../';
-import { getMovies, changeSearchType } from '../../../redux';
+import { changeSearchType, fetchMovies } from '../../../redux';
 import './Search.scss';
 
 const mapDispatchToProps = dispatch => ({
-    getMovies: searchQuery => dispatch(getMovies(searchQuery)),
     changeSearchType: searchType => dispatch(changeSearchType(searchType)),
+    fetchMovies: (searchQuery, searchBy) => dispatch(fetchMovies(searchQuery, searchBy)),
 });
 
-const mapStateToProps = state => ({
-    searchBy: state.searchBy,
+const mapStateToProps = ({ app }) => ({
+    searchBy: app.searchBy,
 });
 
 export const Search = connect(mapStateToProps, mapDispatchToProps)(
-    ({ searchBy, getMovies, changeSearchType }) => {
+    ({ searchBy, changeSearchType, fetchMovies }) => {
         const onSearchSubmit = (event) => {
             event.preventDefault();
             const searchQuery = new FormData(event.target).get('search');
-            getMovies(searchQuery);
+            fetchMovies(searchQuery);
         };
 
         return (

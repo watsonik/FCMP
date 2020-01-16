@@ -1,33 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import { changeSortType } from '../../redux';
+import { changeSortType, fetchMovies } from '../../redux';
 import { ToggleSwitch } from '../UI';
 import './ControlBar.scss';
 
-const mapStateToProps = state => ({
-    sortBy: state.sortBy,
-    filmsCount: state.movies.length,
+const mapStateToProps = ({ app, data }) => ({
+    sortBy: app.sortBy,
+    currentMovie: app.currentMovie,
+    searchQuery: app.searchQuery,
+    filmsCount: data.movies.length,
+    movies: data.movies,
 });
 
 const mapDispatchToProps = dispatch => ({
     changeSortType: sortBy => dispatch(changeSortType(sortBy)),
+    fetchMovies: searchQuery => dispatch(fetchMovies(searchQuery)),
 })
 
-const ControlBar = ({ changeSortType, filmsCount, sortBy }) => {
+const ControlBar = ({ changeSortType, filmsCount, sortBy, currentMovie, movies, fetchMovies, searchQuery }) => {
+    const currentMovieGenre = currentMovie
+        ? currentMovie.genres[0]
+        : null;
     return (
         <div className="control-wrapper">
-            <p className="filmsCount">
-                {`${filmsCount} movie${filmsCount === 1 ? '' : 's'} found`}
-            </p>
+            <Switch>
+                <Route exact path="/">
+                    <p className="films-count">
+                        {`${filmsCount} movie${filmsCount === 1 ? '' : 's'} found`}
+                    </p>
+                </Route>
+                <Route exact path="/movie/:id">
+                    <p className="same-genre-label">
+                        {`Movies of the ${currentMovieGenre} genre`}
+                    </p>
+                </Route>
+            </Switch>
+
             <Route exact path="/">
                 <ToggleSwitch
-                    toggleHandler={event =>
-                        changeSortType(event.target.value.toLowerCase())}
+                    toggleHandler={(event) => {
+                        changeSortType(event.target.value.toLowerCase());
+                        if (searchQuery) fetchMovies(searchQuery);
+                    }}
                     title="SORT BY"
                     leftLabel="YEAR"
                     rightLabel="TITLE"
-                    selected={sortBy}
+                    selected={sortBy === 'release_date' ? 'year' : sortBy}
                 />
             </Route>
         </div>

@@ -6,8 +6,6 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import store from './store';
 import './style/index.scss';
 
-console.log(store.getState())
-
 ReactDOM.render(
     <Provider store={store}>
         <ErrorBoundary>
