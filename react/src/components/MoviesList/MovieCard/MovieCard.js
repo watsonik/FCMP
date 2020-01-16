@@ -7,14 +7,14 @@ import './MovieCard.scss';
 
 const mapDispatchToProps = dispatch => ({
     changeCurrentMovie: movieId => dispatch(changeCurrentMovie(movieId)),
-    fetchMovies: (searchQuery, searchBy) => dispatch(fetchMovies(searchQuery, searchBy)),
+    fetchMovies: (searchQuery) => dispatch(fetchMovies(searchQuery)),
     changeSearchType: (searchBy) => dispatch(changeSearchType(searchBy)),
     changeSortType: (sortBy) => dispatch(changeSortType(sortBy)),
 });
 
 const mapStateToProps = ({ data }) => ({
     movies: data.movies,
-})
+});
 
 const MovieCard = ({ id, title, release_date, genres, poster_path, changeCurrentMovie, changeSearchType, fetchMovies, movies, changeSortType }) => {
     const genresList = genres.map(genre =>

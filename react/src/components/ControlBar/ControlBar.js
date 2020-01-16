@@ -8,7 +8,7 @@ import './ControlBar.scss';
 const mapStateToProps = ({ app, data }) => ({
     sortBy: app.sortBy,
     currentMovie: app.currentMovie,
-    searchQuery: app.searchQuery,
+    searchQuery: data.searchQuery,
     filmsCount: data.movies.length,
     movies: data.movies,
 });
@@ -25,7 +25,7 @@ const ControlBar = ({ changeSortType, filmsCount, sortBy, currentMovie, movies, 
     return (
         <div className="control-wrapper">
             <Switch>
-                <Route exact path="/">
+                <Route exact path="/(|search)/">
                     <p className="films-count">
                         {`${filmsCount} movie${filmsCount === 1 ? '' : 's'} found`}
                     </p>
@@ -37,9 +37,10 @@ const ControlBar = ({ changeSortType, filmsCount, sortBy, currentMovie, movies, 
                 </Route>
             </Switch>
 
-            <Route exact path="/">
+            <Route exact path="/(|search)/">
                 <ToggleSwitch
                     toggleHandler={(event) => {
+                        console.log(sortBy);
                         changeSortType(event.target.value.toLowerCase());
                         if (searchQuery) fetchMovies(searchQuery);
                     }}

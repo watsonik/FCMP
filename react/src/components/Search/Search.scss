@@ -1,4 +1,4 @@
-@import '../../../style/variables.scss';
+@import '../../style/variables.scss';
 
 .search-wrapper {
   position: relative;
@@ -13,7 +13,7 @@
     height: 105%;
     top: 0;
     left: 0;
-    background-image: url('../../../../assets/img/1267865-movie-poster-wallpaper-1920x1080-for-mobile-hd.jpg');
+    background-image: url('../../../assets/img/1267865-movie-poster-wallpaper-1920x1080-for-mobile-hd.jpg');
     background-size: cover;
     z-index: -1;
     filter: blur(3px) brightness(0.4);

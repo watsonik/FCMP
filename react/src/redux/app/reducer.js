@@ -10,7 +10,6 @@ const initialState = {
   error: '',
   searchBy: 'title',
   sortBy: 'release_date',
-  searchQuery: '',
   currentMovie: null,
 }
 

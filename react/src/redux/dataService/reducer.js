@@ -2,12 +2,14 @@ import {
   FETCH_MOVIES_REQUEST,
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
+  CHANGE_SEARCH_QUERY,
 } from '../actionTypes';
 
 const initialState = {
   movies: [],
   fetchingMovies: false,
   error: '',
+  searchQuery: '',
 }
 
 export const reducer = (state = initialState, {type, payload}) => {
@@ -28,6 +30,11 @@ export const reducer = (state = initialState, {type, payload}) => {
         ...state,
         fetchingMovies: false,
         error: payload,
+      }
+    case CHANGE_SEARCH_QUERY:
+      return {
+        ...state,
+        searchQuery: payload,
       }
     default:
       return state;
