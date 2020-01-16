@@ -7,6 +7,7 @@ import {
 } from './components/UI';
 import MoviesList from './components/MoviesList/MoviesList';
 import ControlBar from './components/ControlBar/ControlBar';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
     state = {
@@ -18,6 +19,7 @@ class App extends Component {
 
     filterMovies = () => {
         const { movies, searchBy, searchQuery } = this.state;
+        if (searchQuery === 'blood & concrete') throw new Error('Ублюдок, мать твою, а ну иди сюда...');
         return movies.filter(movie => {
             if (typeof movie[searchBy] === 'string') {
                 return movie[searchBy]
@@ -52,21 +54,23 @@ class App extends Component {
     render() {
         return (
             <div className="central-wrapper">
-                <Header />
-                <main>
-                    <Search
-                        onSearch={this.onSearchQueryChange}
-                        onSearchTypeChange={this.onSearchTypeChange}
-                    />
-                    <ControlBar
-                        toggleSorting={this.onSortToggleHandler}
-                    />
-                    <MoviesList
-                        sortBy={this.state.sortBy}
-                        movies={this.filterMovies()}
-                    />
-                </main>
-                <Footer />
+                <ErrorBoundary>
+                    <Header />
+                    <main>
+                        <Search
+                            onSearch={this.onSearchQueryChange}
+                            onSearchTypeChange={this.onSearchTypeChange}
+                        />
+                        <ControlBar
+                            toggleSorting={this.onSortToggleHandler}
+                        />
+                        <MoviesList
+                            sortBy={this.state.sortBy}
+                            movies={this.filterMovies()}
+                        />
+                    </main>
+                    <Footer />
+                </ErrorBoundary>
             </div>
         );
     };

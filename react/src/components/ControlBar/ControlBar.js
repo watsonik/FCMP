@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleSwitch from '../UI/ToggleSwitch/ToggleSwitch';
+import { ToggleSwitch } from '../UI';
 import './ControlBar.scss';
 
 const ControlBar = ({ toggleSorting }) => {

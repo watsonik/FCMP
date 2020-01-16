@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import uuid from 'uuid';
 import './ToggleSwitch.scss';
 
-export const ToggleSwitch = ({ toggleHandler, title, leftLabel, rightLabel }) => {
+const Toggle = ({ toggleHandler, title, leftLabel, rightLabel }) => {
     const leftId = uuid.v4();
     const rightId = uuid.v4();
 
@@ -31,6 +31,6 @@ export const ToggleSwitch = ({ toggleHandler, title, leftLabel, rightLabel }) =>
             <label className="switch-label" htmlFor={rightId}>{rightLabel}</label>
         </form>
     );
-}
+};
 
-export default ToggleSwitch;
+export const ToggleSwitch = memo(Toggle, () => false);

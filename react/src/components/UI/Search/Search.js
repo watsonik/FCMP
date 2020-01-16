@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import { ToggleSwitch } from '../'
 import './Search.scss';
 
 export const Search = ({ onSearch, onSearchTypeChange }) => {
