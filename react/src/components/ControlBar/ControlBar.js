@@ -1,9 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import { changeSortType } from '../../redux';
 import { ToggleSwitch } from '../UI';
 import './ControlBar.scss';
 
-const ControlBar = ({ toggleSorting, filmsCount }) => {
+const mapStateToProps = state => ({
+    sortBy: state.sortBy,
+    filmsCount: state.movies.length,
+});
+
+const mapDispatchToProps = dispatch => ({
+    changeSortType: sortBy => dispatch(changeSortType(sortBy)),
+})
+
+const ControlBar = ({ changeSortType, filmsCount, sortBy }) => {
     return (
         <div className="control-wrapper">
             <p className="filmsCount">
@@ -11,14 +22,16 @@ const ControlBar = ({ toggleSorting, filmsCount }) => {
             </p>
             <Route exact path="/">
                 <ToggleSwitch
-                    toggleHandler={toggleSorting}
+                    toggleHandler={event =>
+                        changeSortType(event.target.value.toLowerCase())}
                     title="SORT BY"
                     leftLabel="YEAR"
                     rightLabel="TITLE"
+                    selected={sortBy}
                 />
             </Route>
         </div>
     )
 }
 
-export default ControlBar;
+export default connect(mapStateToProps, mapDispatchToProps)(ControlBar);

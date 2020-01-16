@@ -1,8 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { changeCurrentMovie } from '../../../redux';
+
 import './MovieCard.scss';
 
-const MovieCard = ({ id, title, year, genres, posterUrl, selectMovie }) => {
+const mapDispatchToProps = dispatch => ({
+    changeCurrentMovie: movieId => dispatch(changeCurrentMovie(movieId)),
+});
+
+const MovieCard = ({ id, title, year, genres, posterUrl, changeCurrentMovie }) => {
     const genresList = genres.map(genre =>
         <span key={genre} className="card-genre">{genre} </span>);
 
@@ -12,7 +19,7 @@ const MovieCard = ({ id, title, year, genres, posterUrl, selectMovie }) => {
                 <img
                     className="card-image"
                     src={posterUrl}
-                    onClick={() => selectMovie(id)}
+                    onClick={() => changeCurrentMovie(id)}
                 />
             </Link>
             <div className="card-caption">
@@ -26,4 +33,4 @@ const MovieCard = ({ id, title, year, genres, posterUrl, selectMovie }) => {
     )
 }
 
-export default MovieCard;
+export default connect(null, mapDispatchToProps)(MovieCard);

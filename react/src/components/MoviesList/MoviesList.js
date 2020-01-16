@@ -1,6 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import MovieCard from './MovieCard/MovieCard';
 import './MoviesList.scss';
+
+const mapStateToProps = state => ({
+    movies: state.movies,
+    sortBy: state.sortBy,
+});
 
 const MoviesList = ({ movies, sortBy, selectMovie }) => {
     const movieCards = movies
@@ -11,7 +17,7 @@ const MoviesList = ({ movies, sortBy, selectMovie }) => {
             const { id } = movie;
             return <MovieCard
                 key={id}
-                selectMovie={selectMovie}
+                // selectMovie={selectMovie}
                 {...movie}/>
         });
 
@@ -28,4 +34,4 @@ const MoviesList = ({ movies, sortBy, selectMovie }) => {
     );
 }
 
-export default MoviesList;
+export default connect(mapStateToProps)(MoviesList);
