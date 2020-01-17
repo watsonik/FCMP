@@ -18,4 +18,3 @@ export const changeCurrentMovie = (movie) => ({
   type: CHANGE_CURRENT_MOVIE,
   payload: movie,
 });
-

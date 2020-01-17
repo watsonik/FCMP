@@ -52,4 +52,3 @@ describe('action', () => {
     expect(changeSearchQuery(searchQuery)).toEqual(expectedAction);
   });
 });
-

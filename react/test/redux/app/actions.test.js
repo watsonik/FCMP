@@ -45,4 +45,3 @@ describe('action', () => {
     expect(changeCurrentMovie(currentMovie)).toEqual(expectedAction);
   })
 });
-
