@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LogoComponent } from './logo/logo.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { LogoComponent } from './logo/logo.component';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    LogoComponent
+    LogoComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
