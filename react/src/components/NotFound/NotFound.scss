@@ -1,0 +1,30 @@
+@import '../../style/variables.scss';
+
+.notfound-wrapper {
+  margin: 0 auto;
+  padding-top: 20rem;
+  text-align: center;
+
+  .notfound-heading {
+    margin-bottom: 2rem;
+    font-size: 5rem;
+    color: $white;
+  }
+
+  .notfound-image {
+    width: 36rem;
+    height: 36rem;
+    margin-bottom: 3rem;
+  }
+
+  .notfound-subtitle {
+    font-size: 3rem;
+    color: $white;
+    text-align: start;
+
+    .notfound-link {
+      color: $red;
+      font-weight: 700;
+    }
+  }
+}

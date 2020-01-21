@@ -1,0 +1,11 @@
+@import '../../../style/variables.scss';
+
+.logo {
+  color: $red;
+  font-style: Arial;
+  font-size: 2rem;
+
+  b {
+    font-weight: 900;
+  }
+}

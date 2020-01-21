@@ -1,0 +1,17 @@
+@import '../../style/variables.scss';
+
+.control-wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 7.5rem;
+  padding: 2rem 9rem;
+
+  .films-count,
+  .same-genre-label {
+    padding: 0.5rem 0;
+    color: $white;
+    font-size: 2rem;
+    font-weight: bold;
+    opacity: 0.8;
+  }
+}
