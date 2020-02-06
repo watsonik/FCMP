@@ -1,0 +1,17 @@
+.logo {
+  width: 60px;
+  padding-left: 20px;
+}
+
+.logo-wr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font: 26px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: rgba(250, 190, 88, 1);
+}
