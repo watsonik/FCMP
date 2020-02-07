@@ -12,6 +12,10 @@ import {ReadMoreStubComponent} from './components/read-more/read-more.stub.compo
 import {NewsStubComponent} from './news.stub.component';
 import newsRoutes from './mock/news-routers';
 
+// import ReportportalAgent from '../../../lib/reportportal-agent.js';
+// import reportportalConfig from '../../../lib/reportportalConf';
+// let agent;
+
 describe('NewsComponent', () => {
   let component: NewsComponent;
   let fixture: ComponentFixture<NewsComponent>;
@@ -41,6 +45,11 @@ describe('NewsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  // beforeEach(() => {
+  //   agent = new ReportportalAgent(reportportalConfig);
+  //
+  //   jasmine.getEnv().addReporter(agent.getJasmineReporter());
+  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();
